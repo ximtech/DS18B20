@@ -1,7 +1,9 @@
 # DS18B20
-*STM32* LL(Low Layer) library. DS18B20 is 1-Wire digital temperature sensor from Maxim IC. 
-Celsius temperature measurement with 9 to 12-bit precision, from -55 to 125 (+/-0.5). 
-Each sensor has a unique 64-Bit Serial number etched into it - allows for a huge number of sensors to be used on one data bus.
+*STM32* LL(Low Layer) library. DS18B20 is 1-Wire digital temperature sensor from Maxim IC.
+- Power Supply from 3V to 5.5V
+- Celsius temperature measurement with 9 to 12-bit precision, from -55 to 125 (+/-0.5). 
+- Each sensor has a unique 64-Bit Serial number etched into it - allows for a huge number of sensors to be used on one data bus.
+- Conversion Time: < 750ms
 
 <img src="https://github.com/ximtech/DS18B20/blob/main/example/ds18b20.PNG" alt="image" width="300"/>
 
