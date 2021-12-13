@@ -35,6 +35,11 @@ include_directories(${includes}
 
 file(GLOB_RECURSE SOURCES ${sources} 
         ${DS18B20_SOURCES})    # source files
+
+add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT}) # executable declaration should be before libraries
+
+target_link_libraries(${PROJECT_NAME}.elf Vector)   # add library dependencies to project
+target_link_libraries(${PROJECT_NAME}.elf CRC)
 ```
 
 3. Then Build -> Clean -> Rebuild Project

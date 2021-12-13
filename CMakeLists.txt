@@ -6,8 +6,8 @@ set(CMAKE_C_STANDARD 99)
 include(cmake/CPM.cmake)
 
 CPMAddPackage(
-        NAME DWT_Delay
-        GITHUB_REPOSITORY ximtech/DWT_Delay
+        NAME DWTDelay
+        GITHUB_REPOSITORY ximtech/DWTDelay
         GIT_TAG origin/main)
 
 CPMAddPackage(
