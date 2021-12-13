@@ -42,7 +42,7 @@ typedef struct AddressItem {
 } AddressItem;
 
 static Vector addressItemVector = NULL;
-static uint8_t scratchPadDataArray[DS18B20_SCRATCHPAD_SIZE] = {[0 ... DS18B20_SCRATCHPAD_SIZE - 1] = 0};
+static char scratchPadDataArray[DS18B20_SCRATCHPAD_SIZE] = {[0 ... DS18B20_SCRATCHPAD_SIZE - 1] = 0};
 
 static bool isSensorsForLineAlreadyDiscovered(GPIO_TypeDef *GPIOx, uint32_t pin);
 static void searchDS18B20Sensors(GPIO_TypeDef *GPIOx, uint32_t pin);
@@ -138,11 +138,13 @@ void checkConnectionStatusDS18B20(DS18B20Sensor *sensor) {
 }
 
 void deleteDS18B20(DS18B20Sensor *sensor) {
+    vectorDelete(addressItemVector);
     free(sensor);
+    addressItemVector = NULL;
 }
 
 static bool isSensorsForLineAlreadyDiscovered(GPIO_TypeDef *GPIOx, uint32_t pin) {
-    for (uint16_t i = 0; i < getVectorSize(addressItemVector); i++) {
+    for (uint32_t i = 0; i < getVectorSize(addressItemVector); i++) {
         AddressItem *addressItem = vectorGet(addressItemVector, i);
         if (addressItem->GPIOx == GPIOx && addressItem->pin == pin) {
             return true;
@@ -220,7 +222,7 @@ static AddressItem *createAddressItem(GPIO_TypeDef *GPIOx, uint32_t pin, uint64_
 }
 
 static void assignSensorAddress(DS18B20Sensor *sensor) {
-    for (uint16_t i = 0; i < getVectorSize(addressItemVector); i++) {
+    for (uint32_t i = 0; i < getVectorSize(addressItemVector); i++) {
         AddressItem *addressItem = vectorGet(addressItemVector, i);
         if (addressItem->GPIOx == sensor->GPIOx && addressItem->pin == sensor->pin) {
             sensor->address = addressItem->address;
